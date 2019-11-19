@@ -4,12 +4,6 @@ sap.ui.define(
     "use strict";
 
     return Controller.extend("ck.trader.controller.Sessions", {
-      onBackPress: function() {
-        this.getOwnerComponent()
-          .getRouter()
-          .navTo("main");
-      },
-
       onRowSelectionChange: function(oEvent) {
         this.getOwnerComponent()
           .getRouter()

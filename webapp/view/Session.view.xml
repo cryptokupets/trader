@@ -5,18 +5,11 @@
   xmlns:form="sap.ui.layout.form" 
   xmlns:codeeditor="sap.ui.codeeditor" 
   xmlns="sap.m" 
-  xmlns:chart="openui5.fc" 
-  xmlns:indicator="openui5.fc.indicator" 
   displayBlock="true">
   <Page enableScrolling="false" 
     showNavButton="true" 
     navButtonPress="onBackPress" 
     showHeader="true">
-    <headerContent>
-      <Button icon="sap-icon://media-play" 
-        text="Run" 
-        press="onRunPress"/>
-    </headerContent>
     <content>
       <l:ResponsiveSplitter>
         <l:PaneContainer>
@@ -48,90 +41,46 @@
                         </Text>
                       </form:FormElement>
                       <form:FormElement label="Currency">
-                        <ComboBox selectedKey="{draft>/currency}" 
-                          items="{Exchange/Currencies}" 
-                          change="onCurrencyChange">
+                        <Text text="{currency}">
                           <layoutData>
                             <l:GridData span="XL2 L2 M3 S6"/>
                           </layoutData>
-                          <items>
-                            <core:Item text="{key}" 
-                              key="{key}"/>
-                          </items>
-                        </ComboBox>
+                        </Text>
                       </form:FormElement>
                       <form:FormElement label="Asset">
-                        <ComboBox id="asset" 
-                          selectedKey="{draft>/asset}" 
-                          change="onAssetChange">
+                        <Text text="{asset}">
                           <layoutData>
                             <l:GridData span="XL2 L2 M3 S6"/>
                           </layoutData>
-                        </ComboBox>
+                        </Text>
                       </form:FormElement>
                       <form:FormElement label="Period">
-                        <ComboBox selectedKey="{draft>/period}" 
-                          items="{Exchange/Periods}">
+                        <Text text="{period}">
                           <layoutData>
                             <l:GridData span="XL2 L2 M3 S6"/>
                           </layoutData>
-                          <items>
-                            <core:Item text="{key}" 
-                              key="{key}"/>
-                          </items>
-                        </ComboBox>
+                        </Text>
                       </form:FormElement>
                       <form:FormElement label="Start">
-                        <DatePicker id="start" 
-                          displayFormat="short" 
-                          valueFormat="yyyy-MM-dd" 
-                          value="{draft>/start}">
+                        <Text text="{begin}">
                           <layoutData>
                             <l:GridData span="XL2 L2 M3 S6"/>
                           </layoutData>
-                        </DatePicker>
+                        </Text>
                       </form:FormElement>
                       <form:FormElement label="End">
-                        <DatePicker id="end" 
-                          displayFormat="short" 
-                          valueFormat="yyyy-MM-dd" 
-                          value="{draft>/end}">
+                        <Text text="{end}">
                           <layoutData>
                             <l:GridData span="XL2 L2 M3 S6"/>
                           </layoutData>
-                        </DatePicker>
+                        </Text>
                       </form:FormElement>
                       <form:FormElement label="Indicators">
-                        <Input value="{draft>/strategyIndicators}">
+                        <Text text="{indicators}">
                           <layoutData>
                             <l:GridData span="XL2 L2 M3 S6"/>
                           </layoutData>
-                        </Input>
-                      </form:FormElement>
-                      <form:FormElement label="Parameters">
-                        <Input value="{draft>/strategyParameters}">
-                          <layoutData>
-                            <l:GridData span="XL2 L2 M3 S6"/>
-                          </layoutData>
-                        </Input>
-                      </form:FormElement>
-                      <form:FormElement label="Stop loss enabled">
-                        <CheckBox selected="{draft>/stoplossEnabled}"/>
-                      </form:FormElement>
-                      <form:FormElement label="Stop loss level" 
-                        visible="{draft>/stoplossEnabled}">
-                        <Input value="{draft>/stopLossLevel}">
-                          <layoutData>
-                            <l:GridData span="XL2 L2 M3 S6"/>
-                          </layoutData>
-                        </Input>
-                      </form:FormElement>
-                      <form:FormElement label="Fee">
-                        <Input value="{draft>/fee}">
-                          <layoutData>
-                            <l:GridData span="XL2 L2 M3 S6"/>
-                          </layoutData>
-                        </Input>
+                        </Text>
                       </form:FormElement>
                       <form:FormElement label="Initial Balance">
                         <Text text="{initialBalance}">
@@ -147,21 +96,14 @@
                           </layoutData>
                         </Text>
                       </form:FormElement>
-                      <form:FormElement label="Profit">
-                        <Text text="{profit}">
-                          <layoutData>
-                            <l:GridData span="XL2 L2 M3 S6"/>
-                          </layoutData>
-                        </Text>
-                      </form:FormElement>
                     </form:formElements>
                   </form:FormContainer>
                 </form:formContainers>
               </form:Form>
             </l:SplitPane>
             <l:SplitPane>
-              <codeeditor:CodeEditor editable="true" 
-                value="{draft>/code}" 
+              <codeeditor:CodeEditor editable="false" 
+                value="{code}" 
                 height="100%"/>
             </l:SplitPane>
           </l:PaneContainer>

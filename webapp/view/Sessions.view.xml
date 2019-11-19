@@ -2,13 +2,10 @@
 	xmlns:mvc="sap.ui.core.mvc" 
 	xmlns="sap.ui.table" 
 	xmlns:m="sap.m">
-	<m:Page title="Sessions" 
-		showNavButton="true" 
-		navButtonPress="onBackPress">
+	<m:Page title="Sessions">
 		<m:content>
 			<Table id="backtests" 
 				rows="{/Backtest}" 
-				title="Backtest" 
 				selectionMode="Single" 
 				selectionBehavior="RowOnly" 
 				visibleRowCountMode="Auto" 
@@ -32,13 +29,6 @@
 						<m:Label text="Period" />
 						<template>
 							<m:Text text="{period}" 
-								wrapping="false"/>
-						</template>
-					</Column>
-					<Column>
-						<m:Label text="Profit" />
-						<template>
-							<m:Text text="{=${finalBalance}-${initialBalance}}" 
 								wrapping="false"/>
 						</template>
 					</Column>
