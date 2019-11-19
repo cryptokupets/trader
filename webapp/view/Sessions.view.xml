@@ -1,0 +1,49 @@
+<mvc:View controllerName="ck.trader.controller.Sessions" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns="sap.ui.table" 
+	xmlns:m="sap.m">
+	<m:Page title="Sessions" 
+		showNavButton="true" 
+		navButtonPress="onBackPress">
+		<m:content>
+			<Table id="backtests" 
+				rows="{/Backtest}" 
+				title="Backtest" 
+				selectionMode="Single" 
+				selectionBehavior="RowOnly" 
+				visibleRowCountMode="Auto" 
+				rowSelectionChange="onRowSelectionChange">
+				<columns>
+					<Column>
+						<m:Label text="Currency" />
+						<template>
+							<m:Text text="{currency}" 
+								wrapping="false"/>
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Asset" />
+						<template>
+							<m:Text text="{asset}" 
+								wrapping="false"/>
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Period" />
+						<template>
+							<m:Text text="{period}" 
+								wrapping="false"/>
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Profit" />
+						<template>
+							<m:Text text="{=${finalBalance}-${initialBalance}}" 
+								wrapping="false"/>
+						</template>
+					</Column>
+				</columns>
+			</Table>
+		</m:content>
+	</m:Page>
+</mvc:View>
