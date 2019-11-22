@@ -56,6 +56,21 @@
       "routes": [
         {
           "pattern": "",
+          "name": "main",
+          "target": "main"
+        },
+        {
+          "pattern": "analysis/form",
+          "name": "analysisForm",
+          "target": "analysisForm"
+        },
+        {
+          "pattern": "analysis/show",
+          "name": "analysisShow",
+          "target": "analysisShow"
+        },
+        {
+          "pattern": "sessions",
           "name": "sessions",
           "target": "sessions"
         },
@@ -66,13 +81,25 @@
         }
       ],
       "targets": {
+        "main": {
+          "viewName": "Main",
+					"viewLevel": 0
+        },
+        "analysisForm": {
+          "viewName": "AnalysisForm",
+          "viewLevel": 1
+        },
+        "analysisShow": {
+          "viewName": "AnalysisShow",
+          "viewLevel": 2
+        },
         "sessions": {
           "viewName": "Sessions",
-          "viewLevel": 0
+          "viewLevel": 1
         },
         "session": {
           "viewName": "Session",
-          "viewLevel": 1
+          "viewLevel": 2
         }
       }
     }

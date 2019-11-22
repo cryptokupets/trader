@@ -2,7 +2,11 @@
 	xmlns:mvc="sap.ui.core.mvc" 
 	xmlns="sap.ui.table" 
 	xmlns:m="sap.m">
-	<m:Page title="Sessions">
+	<m:Page title="Sessions"
+		enableScrolling="false" 
+    showNavButton="true" 
+    navButtonPress="onBackPress" 
+    showHeader="true">
 		<m:content>
 			<Table id="backtests" 
 				rows="{/Backtest}" 

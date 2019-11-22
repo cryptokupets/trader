@@ -10,6 +10,12 @@ sap.ui.define(
           .navTo("session", {
             id: oEvent.getParameter("rowContext").getProperty("_id")
           });
+      },
+
+      onBackPress: function() {
+        this.getOwnerComponent()
+          .getRouter()
+          .navTo("main");
       }
     });
   }

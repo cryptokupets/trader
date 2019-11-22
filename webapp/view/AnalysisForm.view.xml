@@ -1,0 +1,95 @@
+<mvc:View controllerName="ck.trader.controller.AnalysisForm" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:form="sap.ui.layout.form" 
+	xmlns="sap.m">
+	<Page title="Analysis" 
+		enableScrolling="false" 
+		showNavButton="true" 
+		navButtonPress="onBackPress" 
+		showHeader="true">
+    <headerContent>
+      <Button icon="sap-icon://media-play" 
+        text="Execute" 
+        press="onExecutePress"/>
+    </headerContent>
+		<form:Form editable="true">
+			<form:layout>
+				<form:ResponsiveGridLayout labelSpanXL="2" 
+					labelSpanL="2" 
+					labelSpanM="3" 
+					labelSpanS="6" 
+					adjustLabelSpan="false" 
+					emptySpanXL="0" 
+					emptySpanL="0" 
+					emptySpanM="0" 
+					emptySpanS="0" 
+					columnsXL="12" 
+					columnsL="6" 
+					columnsM="4"/>
+			</form:layout>
+			<form:formContainers>
+				<form:FormContainer>
+					<form:formElements>
+						<form:FormElement label="Exchange">
+							<Input value="{draft>/exchange}">
+								<layoutData>
+									<l:GridData span="XL2 L2 M3 S6"/>
+								</layoutData>
+							</Input>
+						</form:FormElement>
+						<form:FormElement label="Currency">
+							<Input value="{draft>/currency}">
+								<layoutData>
+									<l:GridData span="XL2 L2 M3 S6"/>
+								</layoutData>
+							</Input>
+						</form:FormElement>
+						<form:FormElement label="Asset">
+							<Input value="{draft>/asset}">
+								<layoutData>
+									<l:GridData span="XL2 L2 M3 S6"/>
+								</layoutData>
+							</Input>
+						</form:FormElement>
+						<form:FormElement label="Period">
+							<Input value="{draft>/period}">
+								<layoutData>
+									<l:GridData span="XL2 L2 M3 S6"/>
+								</layoutData>
+							</Input>
+						</form:FormElement>
+						<form:FormElement label="Begin">
+							<DatePicker id="begin" 
+								displayFormat="short" 
+								valueFormat="yyyy-MM-dd" 
+								value="{draft>/begin}">
+								<layoutData>
+									<l:GridData span="XL2 L2 M3 S6"/>
+								</layoutData>
+							</DatePicker>
+						</form:FormElement>
+						<form:FormElement label="End">
+							<DatePicker id="end" 
+								displayFormat="short" 
+								valueFormat="yyyy-MM-dd" 
+								value="{draft>/end}">
+								<layoutData>
+									<l:GridData span="XL2 L2 M3 S6"/>
+								</layoutData>
+							</DatePicker>
+						</form:FormElement>
+						<form:FormElement label="Indicators">
+							<TextArea value="{draft>/indicators}"
+								rows="5">
+								<layoutData>
+									<l:GridData span="XL2 L2 M3 S6"/>
+								</layoutData>
+							</TextArea>
+						</form:FormElement>
+					</form:formElements>
+				</form:FormContainer>
+			</form:formContainers>
+		</form:Form>
+	</Page>
+</mvc:View>

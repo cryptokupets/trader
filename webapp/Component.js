@@ -11,10 +11,10 @@ sap.ui.define(["sap/ui/core/UIComponent", "sap/ui/Device"], function(
 
     init: function() {
       UIComponent.prototype.init.apply(this, arguments);
-      this.getRouter().initialize();
       var oDeviceModel = this.getModel("device");
       oDeviceModel.setDefaultBindingMode("OneWay");
       oDeviceModel.setData(Device);
+      this.getRouter().initialize();
     },
 
     getContentDensityClass: function() {
