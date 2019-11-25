@@ -21,7 +21,7 @@
   "sap.ui5": {
     "autoPrefixId": true,
     "models": {
-      "": {
+      "data": {
         "dataSource": "default",
         "settings": {
           "autoExpandSelect": false,
@@ -29,12 +29,6 @@
           "synchronizationMode": "None",
           "operationMode": "Server"
         }
-      },
-      "draft": {
-        "type": "sap.ui.model.json.JSONModel"
-      },
-      "view": {
-        "type": "sap.ui.model.json.JSONModel"
       },
       "device": {
         "type": "sap.ui.model.json.JSONModel"
@@ -65,7 +59,7 @@
           "target": "analysisForm"
         },
         {
-          "pattern": "analysis/show",
+          "pattern": "analysis/show/{id}",
           "name": "analysisShow",
           "target": "analysisShow"
         },
@@ -83,7 +77,7 @@
       "targets": {
         "main": {
           "viewName": "Main",
-					"viewLevel": 0
+          "viewLevel": 0
         },
         "analysisForm": {
           "viewName": "AnalysisForm",
