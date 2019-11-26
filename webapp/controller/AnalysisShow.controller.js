@@ -18,31 +18,30 @@ sap.ui.define(
           .attachMatched(this._onRouteMatched, this);
         this.getView().addStyleClass(oComponent.getContentDensityClass());
         this.getView().setModel(new JSONModel());
+        this.getView().setModel(new JSONModel(), "chart");
       },
 
       _onRouteMatched: function(oEvent) {
         this._bind("/Session('" + oEvent.getParameter("arguments").id + "')");
-        console.log(this.getView().getModel());
       },
 
       _bind: function(sPath) {
+        var oModel = this.getView().getModel();
         return this.getView()
           .getModel("data")
           .bindContext(sPath)
           .requestObject()
           .then(
             function(oData) {
-              this.getView()
-                .getModel()
-                .setData({
-                  exchange: oData.exchange,
-                  currency: oData.currency,
-                  asset: oData.asset,
-                  period: oData.period,
-                  begin: oData.begin.slice(0, 10),
-                  end: oData.end.slice(0, 10),
-                  indicators: JSON.stringify(oData.indicators)
-                });
+              oModel.setData({
+                exchange: oData.exchange,
+                currency: oData.currency,
+                asset: oData.asset,
+                period: oData.period,
+                begin: oData.begin.slice(0, 10),
+                end: oData.end.slice(0, 10),
+                indicators: JSON.stringify(oData.indicators)
+              });
 
               return $.post({
                 async: true,
@@ -62,15 +61,42 @@ sap.ui.define(
               });
             }.bind(this)
           )
-          .then(function(oData) {
-            console.log(oData); // UNDONE
-          });
+          .then(
+            function(oBuffer) {
+              this.getView()
+                .getModel("chart")
+                .setData({
+                  begin: moment.utc(oModel.getProperty("/begin")).toISOString(),
+                  end: moment
+                    .utc(oModel.getProperty("/end"))
+                    .add(1, "d")
+                    .toISOString(),
+                  candles: oBuffer.value.map(function(e) {
+                    return e.candle;
+                  })
+                });
+              return this._draw();
+            }.bind(this)
+          );
+      },
+
+      _draw: function() {
+        return new Promise(
+          function(resolve) {
+            setTimeout(
+              function() {
+                this.byId("candlestick").refresh();
+                resolve();
+              }.bind(this)
+            );
+          }.bind(this)
+        );
       },
 
       onBackPress: function() {
         this.getOwnerComponent()
           .getRouter()
-          .navTo("main");
+          .navTo("analysisForm");
       }
     });
   }

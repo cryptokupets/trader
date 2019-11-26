@@ -1,9 +1,25 @@
 <mvc:View controllerName="ck.trader.controller.AnalysisShow" 
 	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:chart="openui5.financial.chart" 
 	xmlns="sap.m">
 	<Page title="Analysis" 
 		enableScrolling="false" 
 		showNavButton="true" 
 		navButtonPress="onBackPress" 
-		showHeader="true"/>
+		showHeader="true">
+		<chart:Chart id="candlestick" 
+			height="300px" 
+			padding="5 20 25 60" 
+			start="{chart>/begin}" 
+			end="{chart>/end}" 
+			period="{/period}">
+			<chart:CandlestickChart items="{chart>/candles}">
+				<chart:Candle time="{chart>time}" 
+					open="{chart>open}" 
+					high="{chart>high}" 
+					low="{chart>low}" 
+					close="{chart>close}"/>
+			</chart:CandlestickChart>
+		</chart:Chart>
+	</Page>
 </mvc:View>
