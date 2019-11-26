@@ -22,23 +22,28 @@ sap.ui.define(
 
       _onRouteMatched: function(oEvent) {
         this._bind("/Session('" + oEvent.getParameter("arguments").id + "')");
+        console.log(this.getView().getModel());
       },
 
       _bind: function(sPath) {
-        console.log(sPath);
-        var oModel = new JSONModel();
-        var oView = this.getView();
-        oView.bindElement({
-          path: "data>" + sPath,
-          events: {
-            dataReceived: function() {
-              console.log(1);
-              var oBindingContext = oView.getBindingContext("data");
-              console.log(oBindingContext);
-            }
-          }
-        });
-        console.log(2);
+        this.getView()
+          .getModel("data")
+          .bindContext(sPath)
+          .requestObject()
+          .then(
+            function(oData) {
+              this.getView()
+                .getModel()
+                .setData({
+                  exchange: oData.exchange,
+                  currency: oData.currency,
+                  asset: oData.asset,
+                  period: oData.period,
+                  begin: oData.begin,
+                  end: oData.end
+                });
+            }.bind(this)
+          );
       },
 
       onBackPress: function() {
