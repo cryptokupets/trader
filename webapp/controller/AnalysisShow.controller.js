@@ -26,7 +26,7 @@ sap.ui.define(
       },
 
       _bind: function(sPath) {
-        this.getView()
+        return this.getView()
           .getModel("data")
           .bindContext(sPath)
           .requestObject()
@@ -39,11 +39,32 @@ sap.ui.define(
                   currency: oData.currency,
                   asset: oData.asset,
                   period: oData.period,
-                  begin: oData.begin,
-                  end: oData.end
+                  begin: oData.begin.slice(0, 10),
+                  end: oData.end.slice(0, 10),
+                  indicators: JSON.stringify(oData.indicators)
                 });
+
+              return $.post({
+                async: true,
+                url: "/odata/getData()",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                data: JSON.stringify({
+                  exchange: oData.exchange,
+                  currency: oData.currency,
+                  asset: oData.asset,
+                  period: oData.period,
+                  begin: oData.begin,
+                  end: oData.end,
+                  indicators: JSON.stringify(oData.indicators)
+                })
+              });
             }.bind(this)
-          );
+          )
+          .then(function(oData) {
+            console.log(oData); // UNDONE
+          });
       },
 
       onBackPress: function() {

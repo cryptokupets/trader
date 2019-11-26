@@ -48,7 +48,7 @@ sap.ui.define(
               .add(1, "d")
               .add(-1, "s")
               .toISOString(),
-            indicators: oModel.getProperty("/indicators")
+            indicators: JSON.parse(oModel.getProperty("/indicators"))
           })
         }).then(function(oData) {
           oRouter.navTo("analysisShow", {
