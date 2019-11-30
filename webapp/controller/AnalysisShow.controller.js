@@ -73,6 +73,12 @@ sap.ui.define(
                     .toISOString(),
                   candles: oBuffer.value.map(function(e) {
                     return e.candle;
+                  }),
+                  indicators: oBuffer.value.map(function(b) {
+                    return {
+                      time: b.candle.time,
+                      value: b.indicators[0][0] || 0
+                    };
                   })
                 });
               return this._draw();
@@ -86,6 +92,7 @@ sap.ui.define(
             setTimeout(
               function() {
                 this.byId("candlestick").refresh();
+                this.byId("indicator0").refresh();
                 resolve();
               }.bind(this)
             );
