@@ -74,10 +74,21 @@ sap.ui.define(
                   candles: oBuffer.value.map(function(e) {
                     return e.candle;
                   }),
-                  indicators: oBuffer.value.map(function(b) {
+                  indicators: oBuffer.value[
+                    oBuffer.value.length - 1
+                  ].indicators.map(function(oIndicator, iIndicatorIndex) {
                     return {
-                      time: b.candle.time,
-                      value: b.indicators[0][0] || 0
+                      series: oIndicator.map(function(oValue, iValueIndex) {
+                        // UNDONE
+                        return {
+                          values: oBuffer.value.map(function(b) {
+                            return {
+                              time: b.candle.time,
+                              value: b.indicators[0][0] || 0
+                            };
+                          })
+                        };
+                      })
                     };
                   })
                 });
@@ -92,8 +103,11 @@ sap.ui.define(
             setTimeout(
               function() {
                 this.byId("candlestick").refresh();
-                this.byId("indicator0").refresh();
-                resolve();
+                var aCharts = this.byId("indicators").getItems();
+                for (var i = 0; i < aCharts.length; i++) {
+                  aCharts[i].refresh();
+                }
+                resolve(); // бесполезно
               }.bind(this)
             );
           }.bind(this)

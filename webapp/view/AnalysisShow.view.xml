@@ -21,16 +21,19 @@
 					close="{chart>close}"/>
 			</chart:CandlestickChart>
 		</chart:Chart>
-		<chart:Chart id="indicator0" 
-			height="200px" 
-			padding="5 20 25 60" 
-			start="{chart>/begin}" 
-			end="{chart>/end}" 
-			period="{/period}">
-			<chart:LineChart items="{chart>/indicators}">
-				<chart:LineChartItem time="{chart>time}" 
-					value="{chart>value}"/>
-			</chart:LineChart>
-		</chart:Chart>
+		<VBox id="indicators" 
+			items="{chart>/indicators}">
+			<chart:Chart height="200px" 
+				padding="5 20 25 60" 
+				start="{chart>/begin}" 
+				end="{chart>/end}" 
+				period="{/period}" 
+				series="{chart>series}">
+				<chart:LineChart items="{chart>values}">
+					<chart:LineChartItem time="{chart>time}" 
+						value="{chart>value}"/>
+				</chart:LineChart>
+			</chart:Chart>
+		</VBox>
 	</Page>
 </mvc:View>
