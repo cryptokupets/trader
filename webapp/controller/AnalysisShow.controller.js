@@ -29,7 +29,9 @@ sap.ui.define(
         var oModel = this.getView().getModel();
         return this.getView()
           .getModel("data")
-          .bindContext(sPath)
+          .bindContext(sPath, null, {
+            "$expand": "View"
+          })
           .requestObject()
           .then(
             function(oData) {
@@ -42,27 +44,6 @@ sap.ui.define(
                 end: oData.end.slice(0, 10),
                 indicators: JSON.stringify(oData.indicators)
               });
-
-              return $.post({
-                async: true,
-                url: "/odata/getData()",
-                headers: {
-                  "Content-Type": "application/json"
-                },
-                data: JSON.stringify({
-                  exchange: oData.exchange,
-                  currency: oData.currency,
-                  asset: oData.asset,
-                  period: oData.period,
-                  begin: oData.begin,
-                  end: oData.end,
-                  indicators: JSON.stringify(oData.indicators)
-                })
-              });
-            }.bind(this)
-          )
-          .then(
-            function(oBuffer) {
               this.getView()
                 .getModel("chart")
                 .setData({
@@ -71,26 +52,8 @@ sap.ui.define(
                     .utc(oModel.getProperty("/end"))
                     .add(1, "d")
                     .toISOString(),
-                  candles: oBuffer.value.map(function(e) {
-                    return e.candle;
-                  }),
-                  indicators: oBuffer.value[
-                    oBuffer.value.length - 1
-                  ].indicators.map(function(oIndicator, iIndicatorIndex) {
-                    return {
-                      series: oIndicator.map(function(oValue, iValueIndex) {
-                        // UNDONE
-                        return {
-                          values: oBuffer.value.map(function(b) {
-                            return {
-                              time: b.candle.time,
-                              value: b.indicators[0][0] || 0
-                            };
-                          })
-                        };
-                      })
-                    };
-                  })
+                  candles: oData.View.Candles,
+                  indicators: oData.View.Indicators
                 });
               return this._draw();
             }.bind(this)
