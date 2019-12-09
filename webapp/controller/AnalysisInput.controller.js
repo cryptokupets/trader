@@ -9,12 +9,12 @@ sap.ui.define(
   function(Controller, JSONModel) {
     "use strict";
 
-    return Controller.extend("ck.trader.controller.AnalysisForm", {
+    return Controller.extend("ck.trader.controller.AnalysisInput", {
       onInit: function() {
         var oComponent = this.getOwnerComponent();
         oComponent
           .getRouter()
-          .getRoute("analysisForm")
+          .getRoute("analysisInput")
           .attachMatched(this._onRouteMatched, this);
         this.getView().addStyleClass(oComponent.getContentDensityClass());
         this.getView().setModel(new JSONModel());

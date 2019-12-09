@@ -1,4 +1,4 @@
-<mvc:View controllerName="ck.trader.controller.AnalysisForm" 
+<mvc:View controllerName="ck.trader.controller.AnalysisInput" 
 	xmlns:mvc="sap.ui.core.mvc" 
 	xmlns:l="sap.ui.layout" 
 	xmlns:form="sap.ui.layout.form" 

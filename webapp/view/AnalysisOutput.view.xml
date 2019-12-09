@@ -1,4 +1,4 @@
-<mvc:View controllerName="ck.trader.controller.AnalysisShow" 
+<mvc:View controllerName="ck.trader.controller.AnalysisOutput" 
 	xmlns:mvc="sap.ui.core.mvc" 
 	xmlns:chart="openui5.financial.chart" 
 	xmlns="sap.m">
@@ -28,8 +28,8 @@
 				start="{chart>/begin}" 
 				end="{chart>/end}" 
 				period="{/period}" 
-				series="{chart>series}">
-				<chart:LineChart items="{chart>values}">
+				series="{chart>Series}">
+				<chart:LineChart items="{chart>Items}">
 					<chart:LineChartItem time="{chart>time}" 
 						value="{chart>value}"/>
 				</chart:LineChart>

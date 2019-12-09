@@ -54,14 +54,14 @@
           "target": "main"
         },
         {
-          "pattern": "analysis/form",
-          "name": "analysisForm",
-          "target": "analysisForm"
+          "pattern": "analysis/input",
+          "name": "analysisInput",
+          "target": "analysisInput"
         },
         {
-          "pattern": "analysis/show/{id}",
-          "name": "analysisShow",
-          "target": "analysisShow"
+          "pattern": "analysis/output/{id}",
+          "name": "analysisOutput",
+          "target": "analysisOutput"
         },
         {
           "pattern": "sessions",
@@ -79,12 +79,12 @@
           "viewName": "Main",
           "viewLevel": 0
         },
-        "analysisForm": {
-          "viewName": "AnalysisForm",
+        "analysisInput": {
+          "viewName": "AnalysisInput",
           "viewLevel": 1
         },
-        "analysisShow": {
-          "viewName": "AnalysisShow",
+        "analysisOutput": {
+          "viewName": "AnalysisOutput",
           "viewLevel": 2
         },
         "sessions": {

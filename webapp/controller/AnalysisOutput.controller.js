@@ -9,12 +9,12 @@ sap.ui.define(
   function(Controller, JSONModel) {
     "use strict";
 
-    return Controller.extend("ck.trader.controller.AnalysisShow", {
+    return Controller.extend("ck.trader.controller.AnalysisOutput", {
       onInit: function() {
         var oComponent = this.getOwnerComponent();
         oComponent
           .getRouter()
-          .getRoute("analysisShow")
+          .getRoute("analysisOutput")
           .attachMatched(this._onRouteMatched, this);
         this.getView().addStyleClass(oComponent.getContentDensityClass());
         this.getView().setModel(new JSONModel());
@@ -30,7 +30,7 @@ sap.ui.define(
         return this.getView()
           .getModel("data")
           .bindContext(sPath, null, {
-            "$expand": "View"
+            $expand: "View"
           })
           .requestObject()
           .then(
@@ -80,7 +80,7 @@ sap.ui.define(
       onBackPress: function() {
         this.getOwnerComponent()
           .getRouter()
-          .navTo("analysisForm");
+          .navTo("analysisInput");
       }
     });
   }
