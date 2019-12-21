@@ -51,7 +51,7 @@ sap.ui.define(
             indicators: JSON.parse(oModel.getProperty("/indicators"))
           })
         }).then(function(oData) {
-          oRouter.navTo("analysisShow", {
+          oRouter.navTo("analysisOutput", {
             id: oData._id
           });
         });
