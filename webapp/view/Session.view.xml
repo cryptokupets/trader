@@ -34,63 +34,63 @@
                   <form:FormContainer>
                     <form:formElements>
                       <form:FormElement label="Exchange">
-                        <Text text="{exchange}">
+                        <Text text="{data>exchange}">
                           <layoutData>
                             <l:GridData span="XL2 L2 M3 S6"/>
                           </layoutData>
                         </Text>
                       </form:FormElement>
                       <form:FormElement label="Currency">
-                        <Text text="{currency}">
+                        <Text text="{data>currency}">
                           <layoutData>
                             <l:GridData span="XL2 L2 M3 S6"/>
                           </layoutData>
                         </Text>
                       </form:FormElement>
                       <form:FormElement label="Asset">
-                        <Text text="{asset}">
+                        <Text text="{data>asset}">
                           <layoutData>
                             <l:GridData span="XL2 L2 M3 S6"/>
                           </layoutData>
                         </Text>
                       </form:FormElement>
                       <form:FormElement label="Period">
-                        <Text text="{period}">
+                        <Text text="{data>period}">
                           <layoutData>
                             <l:GridData span="XL2 L2 M3 S6"/>
                           </layoutData>
                         </Text>
                       </form:FormElement>
                       <form:FormElement label="Start">
-                        <Text text="{begin}">
+                        <Text text="{data>begin}">
                           <layoutData>
                             <l:GridData span="XL2 L2 M3 S6"/>
                           </layoutData>
                         </Text>
                       </form:FormElement>
                       <form:FormElement label="End">
-                        <Text text="{end}">
+                        <Text text="{data>end}">
                           <layoutData>
                             <l:GridData span="XL2 L2 M3 S6"/>
                           </layoutData>
                         </Text>
                       </form:FormElement>
                       <form:FormElement label="Indicators">
-                        <Text text="{indicators}">
+                        <Text text="{data>indicators}">
                           <layoutData>
                             <l:GridData span="XL2 L2 M3 S6"/>
                           </layoutData>
                         </Text>
                       </form:FormElement>
                       <form:FormElement label="Initial Balance">
-                        <Text text="{initialBalance}">
+                        <Text text="{data>initialBalance}">
                           <layoutData>
                             <l:GridData span="XL2 L2 M3 S6"/>
                           </layoutData>
                         </Text>
                       </form:FormElement>
                       <form:FormElement label="Final Balance">
-                        <Text text="{finalBalance}">
+                        <Text text="{data>finalBalance}">
                           <layoutData>
                             <l:GridData span="XL2 L2 M3 S6"/>
                           </layoutData>
@@ -103,7 +103,7 @@
             </l:SplitPane>
             <l:SplitPane>
               <codeeditor:CodeEditor editable="false" 
-                value="{code}" 
+                value="{data>code}" 
                 height="100%"/>
             </l:SplitPane>
           </l:PaneContainer>

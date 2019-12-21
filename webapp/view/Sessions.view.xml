@@ -2,14 +2,14 @@
 	xmlns:mvc="sap.ui.core.mvc" 
 	xmlns="sap.ui.table" 
 	xmlns:m="sap.m">
-	<m:Page title="Sessions"
+	<m:Page title="Sessions" 
 		enableScrolling="false" 
-    showNavButton="true" 
-    navButtonPress="onBackPress" 
-    showHeader="true">
+		showNavButton="true" 
+		navButtonPress="onBackPress" 
+		showHeader="true">
 		<m:content>
 			<Table id="backtests" 
-				rows="{/Backtest}" 
+				rows="{data>/Session}" 
 				selectionMode="Single" 
 				selectionBehavior="RowOnly" 
 				visibleRowCountMode="Auto" 
@@ -18,21 +18,70 @@
 					<Column>
 						<m:Label text="Currency" />
 						<template>
-							<m:Text text="{currency}" 
+							<m:Text text="{data>currency}" 
 								wrapping="false"/>
 						</template>
 					</Column>
 					<Column>
 						<m:Label text="Asset" />
 						<template>
-							<m:Text text="{asset}" 
+							<m:Text text="{data>asset}" 
 								wrapping="false"/>
 						</template>
 					</Column>
 					<Column>
 						<m:Label text="Period" />
 						<template>
-							<m:Text text="{period}" 
+							<m:Text text="{data>period}" 
+								wrapping="false"/>
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Begin" />
+						<template>
+							<m:Text text="{data>begin}" 
+								wrapping="false"/>
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="End" />
+						<template>
+							<m:Text text="{data>end}" 
+								wrapping="false"/>
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Indicators" />
+						<template>
+							<m:Text text="{data>indicators}" 
+								wrapping="false"/>
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Code" />
+						<template>
+							<m:Text text="{data>code}" 
+								wrapping="false"/>
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Initial Balance" />
+						<template>
+							<m:Text text="{data>initialBalance}" 
+								wrapping="false"/>
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Final Balance" />
+						<template>
+							<m:Text text="{data>finalBalance}" 
+								wrapping="false"/>
+						</template>
+					</Column>
+					<Column>
+						<m:Label text="Profit" />
+						<template>
+							<m:Text text="{data>profit}" 
 								wrapping="false"/>
 						</template>
 					</Column>

@@ -17,10 +17,11 @@ sap.ui.define(
 
       _onRouteMatched: function(oEvent) {
         var oView = this.getView();
-        var sBacktestId = oEvent.getParameter("arguments").id;
+        var sSessionId = oEvent.getParameter("arguments").id;
 
         oView.bindElement({
-          path: "/Backtest('" + sBacktestId + "')"
+          model: "data",
+          path: "/Session('" + sSessionId + "')"
         });
       },
 
