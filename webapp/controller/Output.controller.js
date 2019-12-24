@@ -9,12 +9,12 @@ sap.ui.define(
   function(Controller, JSONModel) {
     "use strict";
 
-    return Controller.extend("ck.trader.controller.AnalysisOutput", {
+    return Controller.extend("ck.trader.controller.Output", {
       onInit: function() {
         var oComponent = this.getOwnerComponent();
         oComponent
           .getRouter()
-          .getRoute("analysisOutput")
+          .getRoute("output")
           .attachMatched(this._onRouteMatched, this);
         this.getView().addStyleClass(oComponent.getContentDensityClass());
         this.getView().setModel(new JSONModel());
@@ -80,7 +80,7 @@ sap.ui.define(
       onBackPress: function() {
         this.getOwnerComponent()
           .getRouter()
-          .navTo("analysisInput");
+          .navTo("input");
       }
     });
   }

@@ -1,4 +1,4 @@
-<mvc:View controllerName="ck.trader.controller.AnalysisOutput" 
+<mvc:View controllerName="ck.trader.controller.Output" 
 	xmlns:mvc="sap.ui.core.mvc" 
 	xmlns:chart="openui5.financial.chart" 
 	xmlns="sap.m">

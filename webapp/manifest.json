@@ -55,13 +55,13 @@
         },
         {
           "pattern": "analysis/input:?query:",
-          "name": "analysisInput",
-          "target": "analysisInput"
+          "name": "input",
+          "target": "input"
         },
         {
           "pattern": "analysis/output/{id}",
-          "name": "analysisOutput",
-          "target": "analysisOutput"
+          "name": "output",
+          "target": "output"
         },
         {
           "pattern": "sessions",
@@ -79,12 +79,12 @@
           "viewName": "Main",
           "viewLevel": 0
         },
-        "analysisInput": {
-          "viewName": "AnalysisInput",
+        "input": {
+          "viewName": "Input",
           "viewLevel": 1
         },
-        "analysisOutput": {
-          "viewName": "AnalysisOutput",
+        "output": {
+          "viewName": "Output",
           "viewLevel": 2
         },
         "sessions": {
