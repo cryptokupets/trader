@@ -62,7 +62,7 @@ sap.ui.define(
             code: oModel.getProperty("/code")
           })
         }).then(function(oData) {
-          oRouter.navTo("output", {
+          oRouter.navTo("session", {
             id: oData._id
           });
         });

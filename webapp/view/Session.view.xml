@@ -1,18 +1,19 @@
 <mvc:View controllerName="ck.trader.controller.Session" 
-  xmlns:mvc="sap.ui.core.mvc" 
-  xmlns:core="sap.ui.core" 
-  xmlns:l="sap.ui.layout" 
-  xmlns:form="sap.ui.layout.form" 
-  xmlns:codeeditor="sap.ui.codeeditor" 
-  xmlns="sap.m" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:chart="openui5.financial.chart" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:form="sap.ui.layout.form" 
+	xmlns:codeeditor="sap.ui.codeeditor" 
+	xmlns="sap.m"
   displayBlock="true">
-  <Page enableScrolling="false" 
-    showNavButton="true" 
-    navButtonPress="onBackPress" 
-    showHeader="true">
-    <content>
-      <l:ResponsiveSplitter>
-        <l:PaneContainer>
+	<Page title="Session" 
+		enableScrolling="false" 
+		showNavButton="true" 
+		navButtonPress="onBackPress" 
+		showHeader="true">
+		<l:ResponsiveSplitter>
+			<l:PaneContainer>
+				<l:PaneContainer>
           <l:PaneContainer orientation="Vertical">
             <l:SplitPane>
               <form:Form editable="true">
@@ -107,8 +108,42 @@
                 height="100%"/>
             </l:SplitPane>
           </l:PaneContainer>
-        </l:PaneContainer>
-      </l:ResponsiveSplitter>
-    </content>
-  </Page>
+					<l:PaneContainer>
+						<l:SplitPane>
+							<VBox>
+								<chart:Chart id="candlestick" 
+									height="400px" 
+									padding="5 20 25 60" 
+									start="{chart>/begin}" 
+									end="{chart>/end}" 
+									period="{/period}">
+									<chart:CandlestickChart items="{chart>/candles}">
+										<chart:Candle time="{chart>time}" 
+											open="{chart>open}" 
+											high="{chart>high}" 
+											low="{chart>low}" 
+											close="{chart>close}"/>
+									</chart:CandlestickChart>
+								</chart:Chart>
+								<VBox id="indicators" 
+									items="{chart>/indicators}">
+									<chart:Chart height="200px" 
+										padding="5 20 25 60" 
+										start="{chart>/begin}" 
+										end="{chart>/end}" 
+										period="{/period}" 
+										series="{chart>Series}">
+										<chart:LineChart items="{chart>Items}">
+											<chart:LineChartItem time="{chart>time}" 
+												value="{chart>value}"/>
+										</chart:LineChart>
+									</chart:Chart>
+								</VBox>
+							</VBox>
+						</l:SplitPane>
+					</l:PaneContainer>
+				</l:PaneContainer>
+			</l:PaneContainer>
+		</l:ResponsiveSplitter>
+	</Page>
 </mvc:View>
