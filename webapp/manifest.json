@@ -54,12 +54,12 @@
           "target": "main"
         },
         {
-          "pattern": "analysis/input:?query:",
+          "pattern": "input:?query:",
           "name": "input",
           "target": "input"
         },
         {
-          "pattern": "analysis/output/{id}",
+          "pattern": "output/{id}",
           "name": "output",
           "target": "output"
         },

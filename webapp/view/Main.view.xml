@@ -11,13 +11,13 @@
 						<l:BlockLayoutCell titleAlignment="Center">
 							<l:titleLink>
 								<Link text="Analysis" 
-									href="/#/analysis/input"/>
+									href="/#/input"/>
 							</l:titleLink>
 						</l:BlockLayoutCell>
 						<l:BlockLayoutCell titleAlignment="Center">
 							<l:titleLink>
 								<Link text="Backtest" 
-									href="/#/analysis/input?type=backtest"/>
+									href="/#/input?type=backtest"/>
 							</l:titleLink>
 						</l:BlockLayoutCell>
 						<l:BlockLayoutCell titleAlignment="Center">
