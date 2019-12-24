@@ -54,7 +54,7 @@
           "target": "main"
         },
         {
-          "pattern": "analysis/input",
+          "pattern": "analysis/input:?query:",
           "name": "analysisInput",
           "target": "analysisInput"
         },

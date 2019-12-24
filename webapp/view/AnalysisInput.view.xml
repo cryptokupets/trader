@@ -2,6 +2,7 @@
 	xmlns:mvc="sap.ui.core.mvc" 
 	xmlns:l="sap.ui.layout" 
 	xmlns:form="sap.ui.layout.form" 
+	xmlns:codeeditor="sap.ui.codeeditor" 
 	xmlns="sap.m">
 	<Page title="Analysis" 
 		enableScrolling="false" 
@@ -13,83 +14,104 @@
 				text="Execute" 
 				press="onExecutePress"/>
 		</headerContent>
-		<form:Form editable="true">
-			<form:layout>
-				<form:ResponsiveGridLayout labelSpanXL="2" 
-					labelSpanL="2" 
-					labelSpanM="3" 
-					labelSpanS="6" 
-					adjustLabelSpan="false" 
-					emptySpanXL="0" 
-					emptySpanL="0" 
-					emptySpanM="0" 
-					emptySpanS="0" 
-					columnsXL="12" 
-					columnsL="6" 
-					columnsM="4"/>
-			</form:layout>
-			<form:formContainers>
-				<form:FormContainer>
-					<form:formElements>
-						<form:FormElement label="Exchange">
-							<Input value="{/exchange}">
-								<layoutData>
-									<l:GridData span="XL2 L2 M3 S6"/>
-								</layoutData>
-							</Input>
-						</form:FormElement>
-						<form:FormElement label="Currency">
-							<Input value="{/currency}">
-								<layoutData>
-									<l:GridData span="XL2 L2 M3 S6"/>
-								</layoutData>
-							</Input>
-						</form:FormElement>
-						<form:FormElement label="Asset">
-							<Input value="{/asset}">
-								<layoutData>
-									<l:GridData span="XL2 L2 M3 S6"/>
-								</layoutData>
-							</Input>
-						</form:FormElement>
-						<form:FormElement label="Period">
-							<Input value="{/period}">
-								<layoutData>
-									<l:GridData span="XL2 L2 M3 S6"/>
-								</layoutData>
-							</Input>
-						</form:FormElement>
-						<form:FormElement label="Begin">
-							<DatePicker id="begin" 
-								displayFormat="short" 
-								valueFormat="yyyy-MM-dd" 
-								value="{/begin}">
-								<layoutData>
-									<l:GridData span="XL2 L2 M3 S6"/>
-								</layoutData>
-							</DatePicker>
-						</form:FormElement>
-						<form:FormElement label="End">
-							<DatePicker id="end" 
-								displayFormat="short" 
-								valueFormat="yyyy-MM-dd" 
-								value="{/end}">
-								<layoutData>
-									<l:GridData span="XL2 L2 M3 S6"/>
-								</layoutData>
-							</DatePicker>
-						</form:FormElement>
-						<form:FormElement label="Indicators">
-							<TextArea value="{/indicators}" 
-								rows="5">
-								<layoutData>
-									<l:GridData span="XL2 L2 M3 S6"/>
-								</layoutData>
-							</TextArea>
-						</form:FormElement>
-					</form:formElements>
-				</form:FormContainer>
-			</form:formContainers>
-		</form:Form>
+		<l:ResponsiveSplitter>
+			<l:PaneContainer>
+				<l:PaneContainer orientation="Vertical">
+					<l:SplitPane>
+						<form:Form editable="true">
+							<form:layout>
+								<form:ResponsiveGridLayout labelSpanXL="2" 
+									labelSpanL="2" 
+									labelSpanM="3" 
+									labelSpanS="6" 
+									adjustLabelSpan="false" 
+									emptySpanXL="0" 
+									emptySpanL="0" 
+									emptySpanM="0" 
+									emptySpanS="0" 
+									columnsXL="12" 
+									columnsL="6" 
+									columnsM="4"/>
+							</form:layout>
+							<form:formContainers>
+								<form:FormContainer>
+									<form:formElements>
+										<form:FormElement label="Exchange">
+											<Input value="{/exchange}">
+												<layoutData>
+													<l:GridData span="XL2 L2 M3 S6"/>
+												</layoutData>
+											</Input>
+										</form:FormElement>
+										<form:FormElement label="Currency">
+											<Input value="{/currency}">
+												<layoutData>
+													<l:GridData span="XL2 L2 M3 S6"/>
+												</layoutData>
+											</Input>
+										</form:FormElement>
+										<form:FormElement label="Asset">
+											<Input value="{/asset}">
+												<layoutData>
+													<l:GridData span="XL2 L2 M3 S6"/>
+												</layoutData>
+											</Input>
+										</form:FormElement>
+										<form:FormElement label="Period">
+											<Input value="{/period}">
+												<layoutData>
+													<l:GridData span="XL2 L2 M3 S6"/>
+												</layoutData>
+											</Input>
+										</form:FormElement>
+										<form:FormElement label="Begin">
+											<DatePicker id="begin" 
+												displayFormat="short" 
+												valueFormat="yyyy-MM-dd" 
+												value="{/begin}">
+												<layoutData>
+													<l:GridData span="XL2 L2 M3 S6"/>
+												</layoutData>
+											</DatePicker>
+										</form:FormElement>
+										<form:FormElement label="End">
+											<DatePicker id="end" 
+												displayFormat="short" 
+												valueFormat="yyyy-MM-dd" 
+												value="{/end}">
+												<layoutData>
+													<l:GridData span="XL2 L2 M3 S6"/>
+												</layoutData>
+											</DatePicker>
+										</form:FormElement>
+										<form:FormElement label="Indicators">
+											<TextArea value="{/indicators}" 
+												rows="5">
+												<layoutData>
+													<l:GridData span="XL2 L2 M3 S6"/>
+												</layoutData>
+											</TextArea>
+										</form:FormElement>
+										<form:FormElement label="Initial Balance"
+											visible="{=!!${/type}}" >
+											<Input value="{/initialBalance}">
+												<layoutData>
+													<l:GridData span="XL2 L2 M3 S6"/>
+												</layoutData>
+											</Input>
+										</form:FormElement>
+									</form:formElements>
+								</form:FormContainer>
+							</form:formContainers>
+						</form:Form>
+					</l:SplitPane>
+					<l:SplitPane>
+						<codeeditor:CodeEditor editable="{=!!${/type}}" 
+							value="{/code}" 
+							height="100%"/>
+					</l:SplitPane>
+				</l:PaneContainer>
+			</l:PaneContainer>
+		</l:ResponsiveSplitter>
 	</Page>
 </mvc:View>

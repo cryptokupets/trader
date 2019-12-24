@@ -16,11 +16,19 @@ sap.ui.define(
           .getRouter()
           .getRoute("analysisInput")
           .attachMatched(this._onRouteMatched, this);
-        this.getView().addStyleClass(oComponent.getContentDensityClass());
-        this.getView().setModel(new JSONModel());
+        var oView = this.getView();
+        oView.addStyleClass(oComponent.getContentDensityClass());
+        oView.setModel(new JSONModel());
+        oView.setModel(new JSONModel(), "view");
       },
 
-      _onRouteMatched: function() {},
+      _onRouteMatched: function(oEvent) {
+        var aArguments = oEvent.getParameter("arguments");
+        var oQuery = aArguments["?query"];
+        this.getView()
+          .getModel()
+          .setProperty("/type", oQuery ? oQuery.type : "");
+      },
 
       onBackPress: function() {
         this.getOwnerComponent()
@@ -38,6 +46,7 @@ sap.ui.define(
             "Content-Type": "application/json"
           },
           data: JSON.stringify({
+            type: oModel.getProperty("/type"),
             exchange: oModel.getProperty("/exchange"),
             currency: oModel.getProperty("/currency"),
             asset: oModel.getProperty("/asset"),
@@ -48,7 +57,9 @@ sap.ui.define(
               .add(1, "d")
               .add(-1, "s")
               .toISOString(),
-            indicators: JSON.parse(oModel.getProperty("/indicators"))
+            indicators: JSON.parse(oModel.getProperty("/indicators")),
+            initialBalance: +oModel.getProperty("/initialBalance"),
+            code: oModel.getProperty("/code")
           })
         }).then(function(oData) {
           oRouter.navTo("analysisOutput", {
