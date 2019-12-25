@@ -27,7 +27,7 @@ sap.ui.define(
         var oQuery = aArguments["?query"];
         this.getView()
           .getModel()
-          .setProperty("/type", oQuery ? oQuery.type : "");
+          .setProperty("/type", oQuery && oQuery.type ? oQuery.type : "");
       },
 
       onBackPress: function() {
@@ -39,28 +39,37 @@ sap.ui.define(
       onExecutePress: function() {
         var oRouter = this.getOwnerComponent().getRouter();
         var oModel = this.getView().getModel();
+        var sType = oModel.getProperty("/type");
+        var oDraft = {
+          type: sType,
+          exchange: oModel.getProperty("/exchange"),
+          currency: oModel.getProperty("/currency"),
+          asset: oModel.getProperty("/asset"),
+          period: +oModel.getProperty("/period"),
+          indicators: JSON.parse(oModel.getProperty("/indicators"))
+        };
+
+        if (sType !== "paper") {
+          oDraft.begin = moment.utc(oModel.getProperty("/begin")).toISOString();
+          oDraft.end = moment
+            .utc(oModel.getProperty("/end"))
+            .add(1, "d")
+            .add(-1, "s")
+            .toISOString();
+        }
+
+        if (sType) {
+          oDraft.initialBalance = +oModel.getProperty("/initialBalance");
+          oDraft.code = oModel.getProperty("/code");
+        }
+
         $.post({
           async: true,
           url: "/odata/Session",
           headers: {
             "Content-Type": "application/json"
           },
-          data: JSON.stringify({
-            type: oModel.getProperty("/type"),
-            exchange: oModel.getProperty("/exchange"),
-            currency: oModel.getProperty("/currency"),
-            asset: oModel.getProperty("/asset"),
-            period: +oModel.getProperty("/period"),
-            begin: moment.utc(oModel.getProperty("/begin")).toISOString(),
-            end: moment
-              .utc(oModel.getProperty("/end"))
-              .add(1, "d")
-              .add(-1, "s")
-              .toISOString(),
-            indicators: JSON.parse(oModel.getProperty("/indicators")),
-            initialBalance: +oModel.getProperty("/initialBalance"),
-            code: oModel.getProperty("/code")
-          })
+          data: JSON.stringify(oDraft)
         }).then(function(oData) {
           oRouter.navTo("session", {
             id: oData._id

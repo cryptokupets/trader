@@ -64,7 +64,8 @@
 												</layoutData>
 											</Input>
 										</form:FormElement>
-										<form:FormElement label="Begin">
+										<form:FormElement label="Begin" 
+											visible="{=${/type}!=='paper'}">
 											<DatePicker id="begin" 
 												displayFormat="short" 
 												valueFormat="yyyy-MM-dd" 
@@ -74,7 +75,8 @@
 												</layoutData>
 											</DatePicker>
 										</form:FormElement>
-										<form:FormElement label="End">
+										<form:FormElement label="End" 
+											visible="{=${/type}!=='paper'}">
 											<DatePicker id="end" 
 												displayFormat="short" 
 												valueFormat="yyyy-MM-dd" 
@@ -92,8 +94,8 @@
 												</layoutData>
 											</TextArea>
 										</form:FormElement>
-										<form:FormElement label="Initial Balance"
-											visible="{=!!${/type}}" >
+										<form:FormElement label="Initial Balance" 
+											visible="{=!!${/type}}">
 											<Input value="{/initialBalance}">
 												<layoutData>
 													<l:GridData span="XL2 L2 M3 S6"/>

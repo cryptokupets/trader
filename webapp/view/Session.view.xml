@@ -1,19 +1,29 @@
 <mvc:View controllerName="ck.trader.controller.Session" 
-	xmlns:mvc="sap.ui.core.mvc" 
-	xmlns:chart="openui5.financial.chart" 
-	xmlns:l="sap.ui.layout" 
-	xmlns:form="sap.ui.layout.form" 
-	xmlns:codeeditor="sap.ui.codeeditor" 
-	xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc" 
+  xmlns:chart="openui5.financial.chart" 
+  xmlns:l="sap.ui.layout" 
+  xmlns:form="sap.ui.layout.form" 
+  xmlns:codeeditor="sap.ui.codeeditor" 
+  xmlns="sap.m" 
   displayBlock="true">
-	<Page title="Session" 
-		enableScrolling="false" 
-		showNavButton="true" 
-		navButtonPress="onBackPress" 
-		showHeader="true">
-		<l:ResponsiveSplitter>
-			<l:PaneContainer>
-				<l:PaneContainer>
+  <Page title="Session" 
+    enableScrolling="false" 
+    showNavButton="true" 
+    navButtonPress="onBackPress" 
+    showHeader="true">
+    <headerContent>
+      <Button visible="{=${data>type}==='paper'}" 
+        icon="sap-icon://synchronize" 
+        text="Refresh" 
+        press="onRefreshPress"/>
+      <Button visible="{=${data>type}==='paper'}" 
+        icon="sap-icon://stop" 
+        text="Stop" 
+        press="onStopPress"/>
+    </headerContent>
+    <l:ResponsiveSplitter>
+      <l:PaneContainer>
+        <l:PaneContainer>
           <l:PaneContainer orientation="Vertical">
             <l:SplitPane>
               <form:Form editable="true">
@@ -34,6 +44,13 @@
                 <form:formContainers>
                   <form:FormContainer>
                     <form:formElements>
+                      <form:FormElement label="Type">
+                        <Text text="{data>type}">
+                          <layoutData>
+                            <l:GridData span="XL2 L2 M3 S6"/>
+                          </layoutData>
+                        </Text>
+                      </form:FormElement>
                       <form:FormElement label="Exchange">
                         <Text text="{data>exchange}">
                           <layoutData>
@@ -83,15 +100,25 @@
                           </layoutData>
                         </Text>
                       </form:FormElement>
-                      <form:FormElement label="Initial Balance">
+                      <form:FormElement label="Initial Balance" 
+                        visible="{=!!${data>type}}">
                         <Text text="{data>initialBalance}">
                           <layoutData>
                             <l:GridData span="XL2 L2 M3 S6"/>
                           </layoutData>
                         </Text>
                       </form:FormElement>
-                      <form:FormElement label="Final Balance">
+                      <form:FormElement label="Final Balance" 
+                        visible="{=!!${data>type}}">
                         <Text text="{data>finalBalance}">
+                          <layoutData>
+                            <l:GridData span="XL2 L2 M3 S6"/>
+                          </layoutData>
+                        </Text>
+                      </form:FormElement>
+                      <form:FormElement label="Status" 
+                        visible="{=${data>type}==='paper'}">
+                        <Text text="{data>status}">
                           <layoutData>
                             <l:GridData span="XL2 L2 M3 S6"/>
                           </layoutData>
@@ -108,42 +135,42 @@
                 height="100%"/>
             </l:SplitPane>
           </l:PaneContainer>
-					<l:PaneContainer>
-						<l:SplitPane>
-							<VBox>
-								<chart:Chart id="candlestick" 
-									height="400px" 
-									padding="5 20 25 60" 
-									start="{chart>/begin}" 
-									end="{chart>/end}" 
-									period="{/period}">
-									<chart:CandlestickChart items="{chart>/candles}">
-										<chart:Candle time="{chart>time}" 
-											open="{chart>open}" 
-											high="{chart>high}" 
-											low="{chart>low}" 
-											close="{chart>close}"/>
-									</chart:CandlestickChart>
-								</chart:Chart>
-								<VBox id="indicators" 
-									items="{chart>/indicators}">
-									<chart:Chart height="200px" 
-										padding="5 20 25 60" 
-										start="{chart>/begin}" 
-										end="{chart>/end}" 
-										period="{/period}" 
-										series="{chart>Series}">
-										<chart:LineChart items="{chart>Items}">
-											<chart:LineChartItem time="{chart>time}" 
-												value="{chart>value}"/>
-										</chart:LineChart>
-									</chart:Chart>
-								</VBox>
-							</VBox>
-						</l:SplitPane>
-					</l:PaneContainer>
-				</l:PaneContainer>
-			</l:PaneContainer>
-		</l:ResponsiveSplitter>
-	</Page>
+          <l:PaneContainer>
+            <l:SplitPane>
+              <VBox>
+                <chart:Chart id="candlestick" 
+                  height="400px" 
+                  padding="5 20 25 60" 
+                  start="{chart>/begin}" 
+                  end="{chart>/end}" 
+                  period="{/period}">
+                  <chart:CandlestickChart items="{chart>/candles}">
+                    <chart:Candle time="{chart>time}" 
+                      open="{chart>open}" 
+                      high="{chart>high}" 
+                      low="{chart>low}" 
+                      close="{chart>close}"/>
+                  </chart:CandlestickChart>
+                </chart:Chart>
+                <VBox id="indicators" 
+                  items="{chart>/indicators}">
+                  <chart:Chart height="200px" 
+                    padding="5 20 25 60" 
+                    start="{chart>/begin}" 
+                    end="{chart>/end}" 
+                    period="{/period}" 
+                    series="{chart>Series}">
+                    <chart:LineChart items="{chart>Items}">
+                      <chart:LineChartItem time="{chart>time}" 
+                        value="{chart>value}"/>
+                    </chart:LineChart>
+                  </chart:Chart>
+                </VBox>
+              </VBox>
+            </l:SplitPane>
+          </l:PaneContainer>
+        </l:PaneContainer>
+      </l:PaneContainer>
+    </l:ResponsiveSplitter>
+  </Page>
 </mvc:View>

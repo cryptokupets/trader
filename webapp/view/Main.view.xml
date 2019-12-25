@@ -22,6 +22,12 @@
 						</l:BlockLayoutCell>
 						<l:BlockLayoutCell titleAlignment="Center">
 							<l:titleLink>
+								<Link text="Paper Trade" 
+									href="/#/input?type=paper"/>
+							</l:titleLink>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell titleAlignment="Center">
+							<l:titleLink>
 								<Link text="Sessions" 
 									href="/#/sessions"/>
 							</l:titleLink>
