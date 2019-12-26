@@ -25,6 +25,7 @@ sap.ui.define(
         var oView = this.getView();
         var sSessionId = oEvent.getParameter("arguments").id;
         var sPath = "/Session('" + sSessionId + "')";
+        this._sPath = sPath;
 
         oView.bindElement({
           model: "data",
@@ -90,6 +91,14 @@ sap.ui.define(
         this.getOwnerComponent()
           .getRouter()
           .navTo("sessions");
+      },
+
+      onRefreshPress: function() {
+        this.getView().getModel("data").refresh();
+      },
+
+      onStopPress: function() {
+        $.post("/odata" + this._sPath + "/action.stop");
       }
     });
   }
