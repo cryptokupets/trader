@@ -87,12 +87,13 @@
 											</DatePicker>
 										</form:FormElement>
 										<form:FormElement label="Indicators">
-											<TextArea value="{/indicators}" 
-												rows="5">
+											<MultiInput id="indicators" 
+												showValueHelp="false" 
+												tokenUpdate="onTokenUpdate">
 												<layoutData>
 													<l:GridData span="XL2 L2 M3 S6"/>
 												</layoutData>
-											</TextArea>
+											</MultiInput>
 										</form:FormElement>
 										<form:FormElement label="Initial Balance" 
 											visible="{=!!${/type}}">

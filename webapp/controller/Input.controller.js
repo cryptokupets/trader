@@ -4,9 +4,10 @@ sap.ui.define(
   [
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
+    "sap/m/Token",
     "ck/trader/thirdparty/moment-with-locales"
   ],
-  function(Controller, JSONModel) {
+  function(Controller, JSONModel, Token) {
     "use strict";
 
     return Controller.extend("ck.trader.controller.Input", {
@@ -20,14 +21,25 @@ sap.ui.define(
         oView.addStyleClass(oComponent.getContentDensityClass());
         oView.setModel(new JSONModel());
         oView.setModel(new JSONModel(), "view");
+
+        var oIndicators = oView.byId("indicators");
+        oIndicators.addValidator(function(oArgs) {
+          var sText = oArgs.text;
+          return new Token({ key: sText, text: sText });
+        });
       },
 
       _onRouteMatched: function(oEvent) {
         var aArguments = oEvent.getParameter("arguments");
         var oQuery = aArguments["?query"];
-        this.getView()
-          .getModel()
-          .setProperty("/type", oQuery && oQuery.type ? oQuery.type : "");
+        var oModel = this.getView().getModel();
+        oModel.setData({
+          type: oQuery && oQuery.type ? oQuery.type : "",
+          exchange: "",
+          currency: "",
+          asset: "",
+          period: 1
+        });
       },
 
       onBackPress: function() {
@@ -37,16 +49,33 @@ sap.ui.define(
       },
 
       onExecutePress: function() {
+        var oView = this.getView();
         var oRouter = this.getOwnerComponent().getRouter();
         var oModel = this.getView().getModel();
         var sType = oModel.getProperty("/type");
+        var oIndicators = oView.byId("indicators");
         var oDraft = {
           type: sType,
           exchange: oModel.getProperty("/exchange"),
           currency: oModel.getProperty("/currency"),
           asset: oModel.getProperty("/asset"),
           period: +oModel.getProperty("/period"),
-          indicators: JSON.parse(oModel.getProperty("/indicators"))
+          indicators: JSON.stringify(
+            oIndicators.getTokens().map(function(oToken) {
+              var sText = oToken.getText();
+              var aItems = sText.split(/\(|\)|,/).filter(function(e) {
+                return e;
+              });
+              var sName = aItems.shift();
+              var aOptions = aItems.map(function(e) {
+                return +e;
+              });
+              return {
+                name: sName,
+                options: aOptions
+              };
+            })
+          )
         };
 
         if (sType !== "paper") {
